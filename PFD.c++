@@ -4,14 +4,24 @@
 #include <array>
 #include <iostream>
 #include <queue>
+#include <vector>
+#include <algorithm>
 
 #include "PFD.h"
 
 using namespace std;
-
+#define optimize 1
 std::queue<int> do_pfd(istream &r, int& tasks, int& rules)
 {
 	//setup begins
+	#ifndef optimize
+		std::vector<Task> arr;
+		arr.reserve(tasks);
+		for(int i=1;i<=tasks;++i)
+		{
+			arr.emplace_back(i,0);
+		}
+	#endif
 	int matrix[101][101];
 	for(int i=0;i <= 100;++i)
 	{
@@ -27,12 +37,15 @@ std::queue<int> do_pfd(istream &r, int& tasks, int& rules)
 		r >> target;
 		int num_dependents=0;							//gets the number of dependencies
 		r >> num_dependents;
-		matrix[target][0]=num_dependents;			//sets the number of dependencies to the zeroth spot
+		#ifndef optimize
+			arr[target-1].num_dependents = num_dependents;
+		#endif
+		matrix[0][target]=num_dependents;			//sets the number of dependencies to the zeroth spot
 		for(int i=0;i<num_dependents;++i)
 		{
 			int dependent=0;							//gets the dependent task
 			r >> dependent;
-			matrix[target][dependent]=1;		//marks that target need dependent
+			matrix[dependent][target]=1;		//marks that target need dependent
 		}
 		
 	}
@@ -40,32 +53,55 @@ std::queue<int> do_pfd(istream &r, int& tasks, int& rules)
 
 	//solving topological sort begins
 	std::queue<int> order;							//holds the order 
-	int i = 1;
-	//printf("%d\n",tasks);
-	while((int)order.size()!=(int)tasks)						//will terminate when every task has been placed in the order
-	{
-		if(matrix[i][0]==0)							//if the task has no dependents
+	#ifndef optimize
+		while(!arr.empty())
 		{
-			order.push(i);							//adds the task to the order
-			for(int j=1;j<=tasks;++j)				//goes through all the tasks to see if "i" is a dependent
+			std::make_heap(arr.begin(),arr.end(),LessDependents());
+			std::reverse(arr.begin(),arr.end());
+			int x = (arr.back()).target;
+			order.push(x);
+			arr.pop_back();
+			for(int y = 1; y <= tasks;++y)
 			{
-				if(matrix[j][i]==1)					//see if task j has task i as a dependent
+				if(matrix[x][y]==1)
 				{
-					if(matrix[j][0]>0)
-						matrix[j][0]-=1;
-					matrix[j][i] = 0;
-				}									//if so decrease the number of dependents
+					for(unsigned z=0; z< arr.size();++z)
+					{
+						if(arr[z].target == y)
+							arr[z].num_dependents-=1;
+					}
+				}
 			}
-			matrix[i][0]=-1;						//makes sure we dont recount task i
-			i=1;									//resets the lookup
-
+			arr.shrink_to_fit();
 		}
-		else
+	#endif
+	#ifdef optimize
+		int i = 1;
+		while((int)order.size()!=(int)tasks)						//will terminate when every task has been placed in the order
 		{
-			++i;									//moves to the next task
-		}
+			if(matrix[0][i]==0)							//if the task has no dependents
+			{
+				order.push(i);							//adds the task to the order
+				for(int j=1;j<=tasks;++j)				//goes through all the tasks to see if "i" is a dependent
+				{
+					if(matrix[i][j]==1)					//see if task j has task i as a dependent
+					{
+						if(matrix[0][j]>0)
+							matrix[0][j]-=1;
+						matrix[i][j] = 0;
+					}									//if so decrease the number of dependents
+				}
+				matrix[0][i]=-1;						//makes sure we dont recount task i
+				i=1;									//resets the lookup
 
-	}
+			}
+			else
+			{
+				++i;									//moves to the next task
+			}
+
+		}
+	#endif
 	//solving topological sort ends
 	
 	return order;

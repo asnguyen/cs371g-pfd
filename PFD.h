@@ -7,6 +7,28 @@
 
 using namespace std;
 
+struct Task
+{
+	int target;
+	int num_dependents;
+	Task(const int& a, const int& b)
+	{
+		target=a;
+		num_dependents=b;
+	}
+	
+};
+struct LessDependents
+	{
+		bool operator()(const Task& lhs,const Task& rhs)
+		{
+			if(lhs.num_dependents == rhs.num_dependents)
+				return lhs.target > rhs.target;
+			else
+				return lhs.num_dependents > rhs.num_dependents;
+		}
+	};
+
 std::queue<int> do_pfd(istream &r, int& tasks, int& rules);
 
 void print_pfd(std::queue<int> &queue, ostream	&w);
