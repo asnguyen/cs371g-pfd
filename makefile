@@ -10,10 +10,10 @@ FILES :=                             \
     RunPFD.out                       \
     TestPFD.c++                      \
     TestPFD.out					  	 \
-    //pfd-tests/asn579-RunPFD.in   	 \
-    //pfd-tests/asn579-RunPFD.out      \
-    //pfd-tests/asn579-TestPFD.c++     \
-    //pfd-tests/asn579-TestPFD.out     \
+    #//pfd-tests/asn579-RunPFD.in   	 \
+    #//pfd-tests/asn579-RunPFD.out      \
+    #//pfd-tests/asn579-TestPFD.c++     \
+    #//pfd-tests/asn579-TestPFD.out     \
 
 //CLANG-FORMAT := clang-format
 CXXFLAGS     := -pedantic -std=c++11 -Wall
@@ -138,4 +138,4 @@ status:
 	git remote -v
 	git status
 
-test: html PFD.log RunPFD.tmp TestPFD.tmp pfd-tests check
+test: html PFD.log RunPFD.tmp TestPFD.tmp PFD-tests check
