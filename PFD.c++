@@ -14,9 +14,9 @@ std::queue<int> do_pfd(istream &r, int tasks, int rules)
 {
 	//setup begins
 	int matrix[101][101];
-	for(int i=0;i <= tasks;++i)
+	for(int i=0;i <= 100;++i)
 	{
-		for(int j = 0;j<=tasks;++j)
+		for(int j = 0;j<=100;++j)
 			matrix[i][j]=0;
 	}
 	//setup ends
