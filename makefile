@@ -10,10 +10,10 @@ FILES :=                             \
     RunPFD.out                       \
     TestPFD.c++                      \
     TestPFD.out					  	 \
-    //pfd-tests/asn579-RunPFD.in   	 \
-    //pfd-tests/asn579-RunPFD.out      \
-    //pfd-tests/asn579-TestPFD.c++     \
-    //pfd-tests/asn579-TestPFD.out     \
+    #//pfd-tests/asn579-RunPFD.in   	 \
+    #//pfd-tests/asn579-RunPFD.out      \
+    #//pfd-tests/asn579-TestPFD.c++     \
+    #//pfd-tests/asn579-TestPFD.out     \
 
 //CLANG-FORMAT := clang-format
 CXXFLAGS     := -pedantic -std=c++11 -Wall
@@ -49,7 +49,7 @@ PFD.log:
 Doxyfile:
 	doxygen -g
 
-PFDPFD: PFD.h PFD.c++ RunPFD.c++
+RunPFD: PFD.h PFD.c++ RunPFD.c++
 ifeq ($(CC), clang)
 	$(CXX) $(CXXFLAGS) PFD.c++ RunPFD.c++ -o RunPFD
 	-$(CLANG-CHECK) -extra-arg=-std=c++11          PFD.c++     --
