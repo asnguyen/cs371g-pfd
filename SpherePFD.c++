@@ -4,15 +4,17 @@
 #include <utility>
 #include <queue>
 
-#include "PFD.h"
+using namespace std;
+std::queue<int> do_pfd(istream &r, int tasks, int rules);
+void print_pfd(std::queue<int> &queue, ostream	&w);
+void pfd_solve(istream& r, ostream &w);
+bool pfd_read(istream& r, int& i, int& j);
 
 int main()
 {
-	using namespace std;
 	pfd_solve(cin,cout);
 	return 0;
 }
-
 std::queue<int> do_pfd(istream &r, int tasks, int rules)
 {
 	//setup begins
