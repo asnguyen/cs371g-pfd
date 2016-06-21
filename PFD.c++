@@ -1,16 +1,15 @@
 #include <string>
-#include <queue>
 #include <stdlib.h>
 #include <stdio.h>
 #include <array>
 #include <iostream>
-#include <utility>
+#include <queue>
 
 #include "PFD.h"
 
 using namespace std;
 
-std::queue<int> do_pfd(istream &r, int tasks, int rules)
+std::queue<int> do_pfd(istream &r, int& tasks, int& rules)
 {
 	//setup begins
 	int matrix[101][101];

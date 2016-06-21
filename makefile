@@ -57,7 +57,7 @@ ifeq ($(CC), clang)
 	-$(CLANG-CHECK) -extra-arg=-std=c++11          RunPFD.c++  --
 	-$(CLANG-CHECK) -extra-arg=-std=c++11 -analyze RunPFD.c++  --
 else
-	$(CXX) $(CXXFLAGS) $(GPROFFLAGS) PFD.c++ PFD.c++ -o RunPFD
+	$(CXX) $(CXXFLAGS) $(GPROFFLAGS) PFD.c++ RunPFD.c++ -o RunPFD
 endif
 
 RunPFD.tmp: RunPFD

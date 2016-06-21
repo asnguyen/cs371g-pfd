@@ -3,14 +3,16 @@
 
 #include <iostream>
 #include <string>
-#include <utility>
 #include <queue>
 
 using namespace std;
 
-std::queue<int> do_pfd(istream &r, int tasks, int rules);
+std::queue<int> do_pfd(istream &r, int& tasks, int& rules);
+
 void print_pfd(std::queue<int> &queue, ostream	&w);
+
 void pfd_solve(istream& r, ostream &w);
+
 bool pfd_read(istream& r, int& i, int& j);
 
 #endif //PFD_h
