@@ -1,3 +1,9 @@
+commit 7067fada3cee78fe3ce76f57646c38de607712f9
+Author: Anthony Nguyen <anthony@cs.utexas.edu>
+Date:   Tue Jun 21 18:38:38 2016 -0500
+
+    implemented optimization and feature tagged it
+
 commit 4597dd3fcf158da74287b3825c58e13deb0506ee
 Author: Anthony Nguyen <anthony@cs.utexas.edu>
 Date:   Tue Jun 21 03:04:35 2016 -0500
