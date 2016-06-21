@@ -9,8 +9,8 @@ FILES :=                             \
     RunPFD.in                        \
     RunPFD.out                       \
     TestPFD.c++                      \
-    TestPFD.out					  	 \
-    pfd-tests/asn579-RunPFD.in   	 \
+    TestPFD.out			     \
+    pfd-tests/asn579-RunPFD.in       \
     pfd-tests/asn579-RunPFD.out      \
     pfd-tests/asn579-TestPFD.c++     \
     pfd-tests/asn579-TestPFD.out     \
@@ -118,7 +118,7 @@ clean:
 	rm -f  RunPFD.tmp
 	rm -f  TestPFD
 	rm -f  TestPFD.tmp
-	rm -rf PFD-tests
+	rm -rf pfd-tests
 	rm -rf html
 	rm -rf latex
 
